@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    app: db
+    author: intelliqit
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      name: mysql-pod
+      labels:
+        app: db
+    spec:
+     containers:
+       - name: mysql
+         image: mysql
+         env:
+           - name: MYSQL_ROOT_PASSWORD
+             value: intelliqit
+...
+
+
+
+
+
