@@ -1,0 +1,35 @@
+---
+version: '3'
+services:
+  voting-app:
+    image: dockersamples/examplevotingapp_vote
+    ports:
+      - 5050:80
+    deploy:
+      replicas: 2
+
+  redis_app:
+    image: redis
+    ports:
+      - 6379:6379
+
+  worker_app:
+    image: dockersamples/examplevotingapp_worker
+
+  postgres_app:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: intelliqit
+      POSTGRES_USER: myuser
+      POSTGRES_DB: mydb
+    ports:
+      - 5432:5432
+
+  result_app:
+    image: dockersamples/examplevotingapp_result
+    ports:
+      - 6060:80
+    deploy:
+      replicas: 2
+...
+
