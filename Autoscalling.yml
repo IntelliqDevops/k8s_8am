@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+spec:
+  selector:
+    matchLabels:
+      app: ci-cd
+  template:
+    metadata:
+     labels:
+       app: ci-cd
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 50m
+            limits:
+              cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+  labels:
+    app: ci-cd
+spec:
+  type: ClusterIP
+  ports:
+   - port: 80
+  selector:
+    app: ci-cd
+...
