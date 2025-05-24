@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: apache-deployment
+ labels:
+  author: krishna
+  type: apache-appserver
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   name: apache-appserver
+ template:
+  metadata:
+   name: apache-pod
+   labels:
+    name: apache-appserver
+  spec:
+   containers:
+    - name: myapache
+      image: httpd
+      ports:
+       - containerPort: 80
+...
+
